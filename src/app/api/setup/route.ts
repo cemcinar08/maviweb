@@ -1,8 +1,21 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { execSync } from 'child_process'
 
 export async function GET() {
+  const logs: string[] = []
+
   try {
+    // 1. Veritabanı şemasını oluştur
+    logs.push('Running prisma db push...')
+    execSync('npx prisma db push --accept-data-loss', {
+      env: { ...process.env, DATABASE_URL: process.env.DATABASE_URL },
+      cwd: process.cwd(),
+      timeout: 30000,
+    })
+    logs.push('Schema created successfully')
+
+    // 2. Kaynakları yükle
     const sources = [
       { name: 'NIST Cybersecurity', url: 'https://www.nist.gov/news-events/cybersecurity/rss.xml', rssUrl: 'https://www.nist.gov/news-events/cybersecurity/rss.xml', category: 'NIST' as const },
       { name: 'NIST IT', url: 'https://www.nist.gov/news-events/information%20technology/rss.xml', rssUrl: 'https://www.nist.gov/news-events/information%20technology/rss.xml', category: 'NIST' as const },
@@ -19,17 +32,20 @@ export async function GET() {
       { name: 'ÇözümPark', url: 'https://www.cozumpark.com/feed/', rssUrl: 'https://www.cozumpark.com/feed/', category: 'TEKNOLOJI' as const },
     ]
 
+    let seeded = 0
     for (const source of sources) {
       await prisma.source.upsert({
         where: { name: source.name },
         update: {},
         create: source,
       })
+      seeded++
     }
+    logs.push(`${seeded} sources seeded`)
 
-    return NextResponse.json({ success: true, message: 'Kaynaklar yüklendi' })
-  } catch (error) {
-    console.error('Setup error:', error)
-    return NextResponse.json({ error: 'Setup failed' }, { status: 500 })
+    return NextResponse.json({ success: true, logs })
+  } catch (error: any) {
+    logs.push(`Error: ${error.message || error}`)
+    return NextResponse.json({ success: false, logs }, { status: 500 })
   }
 }
