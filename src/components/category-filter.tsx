@@ -4,9 +4,9 @@ import { CATEGORIES, type CategoryKey } from '@/types'
 import { cn } from '@/lib/utils'
 
 interface Props {
-  selected: CategoryKey | 'ALL' | null
+  selected: CategoryKey | null
   type: 'regulasyon' | 'teknoloji'
-  onSelect: (category: CategoryKey | 'ALL' | null) => void
+  onSelect: (category: CategoryKey | null) => void
 }
 
 export function CategoryFilter({ selected, type, onSelect }: Props) {
