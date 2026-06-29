@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Category {
+  KVKK
+  GDPR
+  SPK
+  BTK
+  ISO27001
+  NIST
+  TEKNOLOJI
+}
+
+model Source {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  url       String
+  rssUrl    String?
+  category  Category
+  isActive  Boolean   @default(true)
+  articles  Article[]
+  createdAt DateTime  @default(now())
+}
+
+model Article {
+  id          String    @id @default(cuid())
+  title       String
+  content     String?
+  url         String    @unique
+  imageUrl    String?
+  publishedAt DateTime
+  sourceId    String
+  source      Source    @relation(fields: [sourceId], references: [id])
+  category    Category
+  createdAt   DateTime  @default(now())
+  favorites   Favorite[]
+}
+
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  name          String?
+  password      String?
+  image         String?
+  favorites     Favorite[]
+  subscriptions Subscription[]
+  createdAt     DateTime       @default(now())
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  articleId String
+  article   Article  @relation(fields: [articleId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([userId, articleId])
+}
+
+model Subscription {
+  id         String   @id @default(cuid())
+  email      String   @unique
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id])
+  frequency  String   @default("daily")
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+}
