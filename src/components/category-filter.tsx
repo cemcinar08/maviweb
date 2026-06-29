@@ -19,8 +19,8 @@ export function CategoryFilter({ selected, type, onSelect }: Props) {
       <button
         onClick={() => onSelect(null)}
         className={cn(
-          'px-2.5 py-1 rounded-md text-xs font-medium transition-colors',
-          !selected ? 'bg-primary text-primary-foreground' : 'bg-muted hover:bg-muted/80'
+          'px-3 py-1 rounded-full text-xs font-medium transition-colors',
+          !selected ? 'bg-[#3b5998] text-white' : 'bg-[#f0f1f3] text-[#656a73] hover:bg-[#e8ecf0]'
         )}
       >
         Tümü
@@ -30,8 +30,8 @@ export function CategoryFilter({ selected, type, onSelect }: Props) {
           key={key}
           onClick={() => onSelect(key)}
           className={cn(
-            'px-2.5 py-1 rounded-md text-xs font-medium transition-colors',
-            selected === key ? cat.color : 'bg-muted hover:bg-muted/80'
+            'px-3 py-1 rounded-full text-xs font-medium transition-colors',
+            selected === key ? cat.color : 'bg-[#f0f1f3] text-[#656a73] hover:bg-[#e8ecf0]'
           )}
         >
           {cat.label}

@@ -23,7 +23,7 @@ export default async function CategoryPage({ params }: { params: { kategori: str
       </Link>
 
       <div className="flex items-center gap-3 mb-6">
-        <h1 className="text-2xl font-bold">{cat?.label || category}</h1>
+        {cat && <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${cat.color}`}>{cat.label}</span>}
         <span className="text-sm text-muted-foreground">({articles.length} haber)</span>
       </div>
 

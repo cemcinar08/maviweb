@@ -1,11 +1,11 @@
 export const CATEGORIES = {
-  KVKK: { label: 'KVKK', color: 'bg-red-100 text-red-800', type: 'regulasyon' },
-  GDPR: { label: 'GDPR', color: 'bg-blue-100 text-blue-800', type: 'regulasyon' },
-  SPK: { label: 'SPK', color: 'bg-green-100 text-green-800', type: 'regulasyon' },
-  BTK: { label: 'BTK', color: 'bg-purple-100 text-purple-800', type: 'regulasyon' },
-  ISO27001: { label: 'ISO 27001', color: 'bg-yellow-100 text-yellow-800', type: 'regulasyon' },
-  NIST: { label: 'NIST', color: 'bg-indigo-100 text-indigo-800', type: 'regulasyon' },
-  TEKNOLOJI: { label: 'Teknoloji', color: 'bg-cyan-100 text-cyan-800', type: 'teknoloji' },
+  KVKK: { label: 'KVKK', color: 'bg-[#e67e22] text-white', type: 'regulasyon' },
+  GDPR: { label: 'GDPR', color: 'bg-[#2ecc71] text-white', type: 'regulasyon' },
+  SPK: { label: 'SPK', color: 'bg-[#9b59b6] text-white', type: 'regulasyon' },
+  BTK: { label: 'BTK', color: 'bg-[#34495e] text-white', type: 'regulasyon' },
+  ISO27001: { label: 'ISO 27001', color: 'bg-[#795548] text-white', type: 'regulasyon' },
+  NIST: { label: 'NIST', color: 'bg-[#4CAF50] text-white', type: 'regulasyon' },
+  TEKNOLOJI: { label: 'Teknoloji', color: 'bg-[#3b5998] text-white', type: 'teknoloji' },
 } as const
 
 export type CategoryKey = keyof typeof CATEGORIES

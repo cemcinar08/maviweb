@@ -11,19 +11,24 @@ export default function Home() {
   const [techCategory, setTechCategory] = useState<CategoryKey | null>(null)
 
   return (
-    <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold mb-1">RegNews</h1>
+    <div className="space-y-8">
+      {/* Hero / Featured */}
+      <section className="bg-gradient-to-br from-[#3b5998]/5 to-transparent rounded-xl p-6 border border-gray-100">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-1 h-6 bg-[#3b5998] rounded-full" />
+          <h1 className="text-2xl font-bold text-[#1d2129]">RegNews</h1>
+        </div>
         <p className="text-sm text-muted-foreground">
-          Regülasyon ve teknoloji haberleri tek ekranda.
+          KVKK, GDPR, NIST, SPK, BTK, ISO 27001 regülasyon haberleri ve teknoloji dünyasından son gelişmeler.
         </p>
-      </div>
+      </section>
 
+      {/* Main Content */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <section>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold">Regülasyon</h2>
-            <span className="text-xs text-muted-foreground">KVKK · GDPR · NIST · SPK · BTK · ISO 27001</span>
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-1 h-5 bg-[#e67e22] rounded-full" />
+            <h2 className="section-title">Regülasyon</h2>
           </div>
           <div className="mb-4">
             <CategoryFilter
@@ -35,14 +40,17 @@ export default function Home() {
           <NewsFeed type="regulasyon" category={regCategory} />
 
           <div className="mt-6">
-            <NewsletterForm />
+            <div className="container-wrapper">
+              <h3 className="text-sm font-semibold mb-3">E-posta Bülteni</h3>
+              <NewsletterForm />
+            </div>
           </div>
         </section>
 
         <section>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold">Teknoloji</h2>
-            <span className="text-xs text-muted-foreground">ShiftDelete · Webtekno · DH · Technopat · ÇözümPark</span>
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-1 h-5 bg-[#3b5998] rounded-full" />
+            <h2 className="section-title">Teknoloji</h2>
           </div>
           <div className="mb-4">
             <CategoryFilter

@@ -1,10 +1,13 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Roboto } from 'next/font/google'
 import './globals.css'
 import { Providers } from './providers'
 import { Navbar } from '@/components/navbar'
 
-const inter = Inter({ subsets: ['latin', 'latin-ext'] })
+const roboto = Roboto({
+  weight: ['300', '400', '500', '700', '900'],
+  subsets: ['latin', 'latin-ext'],
+})
 
 export const metadata: Metadata = {
   title: 'RegNews - Regülasyon ve Teknoloji Haberleri',
@@ -14,7 +17,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="tr" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={roboto.className}>
         <Providers>
           <Navbar />
           <main className="mx-auto max-w-7xl px-4 py-6">
